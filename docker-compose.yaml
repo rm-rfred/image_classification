@@ -1,0 +1,13 @@
+version: "3"
+services:
+  frontend:
+    restart: on-failure
+    image: rm-rfred/ner-frontend:devel
+    stdin_open: true
+    build: ./frontend
+    container_namex: frontend
+    environment:
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ./frontend/app:/app
