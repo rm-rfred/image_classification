@@ -9,7 +9,7 @@ import uvicorn
 from api.api import api_router
 
 root_router = APIRouter()
-app = FastAPI(title="NER API", openapi_url="/api/openapi.json")
+app = FastAPI(title="IMAGE CLASSIFICATION API", openapi_url="/api/openapi.json")
 
 
 @app.get("/api/docs", include_in_schema=False)
