@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { DropzoneArea } from "react-mui-dropzone";
 import { FormProvider, useForm } from "react-hook-form";
@@ -9,14 +9,10 @@ import { apiFetch } from "../utils/Fetch";
 
 const useStyles = makeStyles(() => ({
   dropzoneContainer: {
-    display: "flex",
-    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    minHeight: "200px", // Set a minimum height to ensure a centered image preview
-    border: "2px dashed #cccccc",
-    borderRadius: "4px",
-    padding: "20px",
+    minHeight: "200px",
+    padding: "40px",
     backgroundColor: "#f8f8f8",
     color: "#333",
     outline: "none",
@@ -68,19 +64,23 @@ export const FileUpload: React.FC<Props> = ({ setPredictedClass }) => {
     <>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <DropzoneArea
-            acceptedFiles={["image/*"]}
-            dropzoneText={
-              "Drag and drop an image to perform image classification"
-            }
-            filesLimit={1}
-            showAlerts={isDirty}
-            previewGridClasses={{
-              container: classes.dropzoneContainer,
-            }}
-            onChange={handleFileChange}
-          />
-          <Button type="submit">Upload File</Button>
+          <Stack spacing={1}>
+            <DropzoneArea
+              acceptedFiles={["image/*"]}
+              dropzoneText={
+                "Drag and drop an image to perform image classification"
+              }
+              filesLimit={1}
+              showAlerts={isDirty}
+              previewGridClasses={{
+                container: classes.dropzoneContainer,
+              }}
+              onChange={handleFileChange}
+            />
+            <Button type="submit" variant="outlined">
+              COMPUTE IMAGE CLASSIFICATION
+            </Button>
+          </Stack>
         </form>
       </FormProvider>
     </>

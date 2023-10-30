@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import {
+  Chip,
   Container,
   CssBaseline,
   Grid,
@@ -29,7 +30,7 @@ function App() {
       mode: themeMode,
       primary: {
         main: "#d0d0d0",
-        light: "#ac6000",
+        light: "#FFFFFF",
         dark: "#ffbe4c",
         contrastText: "#000000",
       },
@@ -44,10 +45,7 @@ function App() {
       MuiCssBaseline: {
         styleOverrides: {
           body: {
-            background:
-              themeMode === "light"
-                ? "linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%)"
-                : "linear-gradient(90deg, #f7f7f7 0%, #dcdcdc 100%)",
+            background: themeMode === "light" ? "#030342" : "#D9FBFC",
           },
         },
       },
@@ -68,26 +66,26 @@ function App() {
         >
           {cookies.get("theme") === "dark" ? <Brightness7 /> : <Brightness4 />}
         </IconButton>
-        <Container
-          style={{
-            width: "100vh",
-            height: "100vh",
-          }}
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          style={{ height: "100vh" }}
         >
-          <Grid
-            container
-            justifyContent="center"
-            alignItems="center"
-            style={{ height: "100vh" }}
-          >
-            <Grid item>
-              <Stack spacing={2}>
-                <FileUpload setPredictedClass={setPredictedClass} />
-                <Typography>{predictedClass}</Typography>
-              </Stack>
-            </Grid>
+          <Grid item justifyContent="center">
+            <Stack spacing={2} alignItems="center" justifyContent="center">
+              <FileUpload setPredictedClass={setPredictedClass} />
+              {predictedClass ? (
+                <Chip
+                  label={predictedClass}
+                  style={{ backgroundColor: "#C12F1D", height: "3vh" }}
+                ></Chip>
+              ) : (
+                ""
+              )}
+            </Stack>
           </Grid>
-        </Container>
+        </Grid>
       </CssBaseline>
     </ThemeProvider>
   );
