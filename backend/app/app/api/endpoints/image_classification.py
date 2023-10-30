@@ -3,7 +3,6 @@ import tempfile
 
 import cv2
 from fastapi import APIRouter, File
-from simber import Logger
 
 from app.utils.grpc_client import GrpcClient
 
