@@ -73,7 +73,7 @@ export const FileUpload: React.FC<Props> = ({ setPredictedClass }) => {
             dropzoneText={
               "Drag and drop an image to perform image classification"
             }
-            filesLimit={3}
+            filesLimit={1}
             showAlerts={isDirty}
             previewGridClasses={{
               container: classes.dropzoneContainer,
