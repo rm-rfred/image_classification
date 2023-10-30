@@ -8,6 +8,7 @@ import {
   IconButton,
   PaletteMode,
   Stack,
+  Typography,
 } from "@mui/material";
 import { Cookies } from "react-cookie";
 
@@ -17,6 +18,7 @@ import { Brightness4, Brightness7 } from "@mui/icons-material";
 import FileUpload from "./components/FileUpload";
 
 function App() {
+  const [predictedClass, setPredictedClass] = useState("");
   const cookies = new Cookies();
   const [themeMode, setThemeMode] = useState<PaletteMode>(
     cookies.get("theme") || "dark"
@@ -80,8 +82,8 @@ function App() {
           >
             <Grid item>
               <Stack spacing={2}>
-                {/* <Dropzone /> */}
-                <FileUpload />
+                <FileUpload setPredictedClass={setPredictedClass} />
+                <Typography>{predictedClass}</Typography>
               </Stack>
             </Grid>
           </Grid>

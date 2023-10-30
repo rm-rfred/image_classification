@@ -29,7 +29,11 @@ type FormData = {
   file: FileList | null;
 };
 
-export const FileUpload = (): JSX.Element => {
+interface Props {
+  setPredictedClass: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export const FileUpload: React.FC<Props> = ({ setPredictedClass }) => {
   const classes = useStyles();
   const methods = useForm<FormData>();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -45,7 +49,7 @@ export const FileUpload = (): JSX.Element => {
       formDataToSend.append("file", selectedFile);
 
       apiFetch("/api/image_classification/classify", "POST", {}, formDataToSend)
-        .then((response) => console.log(response))
+        .then((response) => setPredictedClass(response))
         .catch((error) => console.error("Error:", error));
     } else {
       console.error("No file selected.");
