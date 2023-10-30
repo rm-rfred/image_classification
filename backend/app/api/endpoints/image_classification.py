@@ -1,4 +1,5 @@
 import pickle
+import tempfile
 
 import cv2
 import grpc
@@ -66,10 +67,13 @@ def hello_world():
     }
 
 @router.post("/classify", status_code=200)
-async def post_image(endpoint: str = "image-classification-worker:13000", file: bytes = File(...), timeout: int = 60):
-    with open('image.png','wb') as image:
-        image.write(file)
-        image.close()
+async def post_image(endpoint: str = "image-classification-worker:13000", file: bytes = File(...), timeout: int = 60) -> str:
+    with tempfile.NamedTemporaryFile(suffix=".png", delete=True) as temp_file:
+        temp_file.write(file)
+        temp_file_path = temp_file.name
 
-    image = cv2.imread(f"image.png")
-    return GrpcClient.get_image_classification_from_grpc(endpoint, pickle.dumps(image), timeout=timeout)
+        image = cv2.imread(temp_file_path)
+
+        response = GrpcClient.get_image_classification_from_grpc(endpoint, pickle.dumps(image), timeout=timeout)
+
+    return response
