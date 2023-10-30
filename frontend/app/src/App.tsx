@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import {
@@ -22,6 +22,9 @@ function App() {
   const [themeMode, setThemeMode] = useState<PaletteMode>(
     cookies.get("theme") || "dark"
   );
+  useEffect(() => {
+    document.title = "Image classification";
+  }, []);
 
   const theme = createTheme({
     palette: {
