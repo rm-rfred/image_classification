@@ -3,23 +3,21 @@ import React, { useState } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import {
   Chip,
-  Container,
+  CircularProgress,
   CssBaseline,
   Grid,
   IconButton,
   PaletteMode,
   Stack,
-  Typography,
 } from "@mui/material";
 import { Cookies } from "react-cookie";
-
-// import Dropzone from "./components/Dropzone";
-
 import { Brightness4, Brightness7 } from "@mui/icons-material";
+
 import FileUpload from "./components/FileUpload";
 
 function App() {
   const [predictedClass, setPredictedClass] = useState("");
+  const [isFetching, setIsFetching] = useState(false);
   const cookies = new Cookies();
   const [themeMode, setThemeMode] = useState<PaletteMode>(
     cookies.get("theme") || "dark"
@@ -74,15 +72,20 @@ function App() {
         >
           <Grid item justifyContent="center">
             <Stack spacing={2} alignItems="center" justifyContent="center">
-              <FileUpload setPredictedClass={setPredictedClass} />
-              {predictedClass ? (
-                <Chip
-                  label={predictedClass}
-                  style={{ backgroundColor: "#C12F1D", height: "3vh" }}
-                ></Chip>
-              ) : (
-                ""
-              )}
+              <FileUpload
+                setPredictedClass={setPredictedClass}
+                isFetching={isFetching}
+                setIsFetching={setIsFetching}
+              />
+              <Stack alignItems="center" direction="row" spacing={2}>
+                {predictedClass && (
+                  <Chip
+                    label={predictedClass}
+                    style={{ backgroundColor: "#C12F1D", height: "3vh" }}
+                  ></Chip>
+                )}
+                {isFetching && <CircularProgress />}
+              </Stack>
             </Stack>
           </Grid>
         </Grid>
