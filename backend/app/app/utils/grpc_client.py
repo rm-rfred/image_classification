@@ -7,7 +7,7 @@ from app.config import (
 
 class GrpcClient:
     @staticmethod
-    def get_image_classification_from_grpc(endpoint: str, image, timeout: int = 60) -> str:
+    def get_image_classification_from_grpc(endpoint: str, image: bytes, timeout: int = 60) -> str:
         return GrpcClient.image_classification(
             endpoint=endpoint, image=image, timeout=timeout
         )
@@ -41,6 +41,6 @@ class GrpcClient:
         response = stub.ApplyImageClassification(
             image_classification_pb2.ImageClassificationRequest(
                 image=image,
-            )
+            ), timeout=timeout
         )
         return response.predicted_class
