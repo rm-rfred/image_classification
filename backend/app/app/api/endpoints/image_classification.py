@@ -9,13 +9,6 @@ from app.utils.grpc_client import GrpcClient
 
 router = APIRouter()
 
-LOG_FORMAT = "{levelname} [{filename}:{lineno}]:"
-
-LOG_LEVEL: str = "INFO"
-logger = Logger(__name__, log_path="/tmp/logs/server.log", level=LOG_LEVEL)
-logger.update_format(LOG_FORMAT)
-
-
 @router.get("/", status_code=200)
 def hello_world():
     return {
