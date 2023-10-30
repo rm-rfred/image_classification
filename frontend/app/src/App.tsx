@@ -56,6 +56,17 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme>
+        {isFetching && (
+          <CircularProgress
+            sx={{
+              position: "fixed",
+              left: 25,
+              top: 25,
+              zIndex: 5,
+              color: "#C12F1D",
+            }}
+          />
+        )}
         <IconButton
           color="inherit"
           sx={{ position: "fixed", right: 25, top: 25, zIndex: 5 }}
@@ -67,31 +78,31 @@ function App() {
         >
           {cookies.get("theme") === "dark" ? <Brightness7 /> : <Brightness4 />}
         </IconButton>
-        <Grid
-          container
-          justifyContent="center"
-          alignItems="center"
-          style={{ height: "100vh" }}
-        >
-          <Grid item justifyContent="center">
-            <Stack spacing={2} alignItems="center" justifyContent="center">
-              <FileUpload
-                setPredictedClass={setPredictedClass}
-                isFetching={isFetching}
-                setIsFetching={setIsFetching}
-              />
-              <Stack alignItems="center" direction="row" spacing={2}>
-                {predictedClass && (
-                  <Chip
-                    label={predictedClass}
-                    style={{ backgroundColor: "#C12F1D", height: "3vh" }}
-                  ></Chip>
-                )}
-                {isFetching && <CircularProgress />}
+        <Stack alignItems="center">
+          <Grid
+            container
+            justifyContent="center"
+            alignItems="center"
+            style={{ height: "100vh" }}
+          >
+            <Grid item justifyContent="center">
+              <Stack spacing={2} alignItems="center" justifyContent="center">
+                <FileUpload
+                  setPredictedClass={setPredictedClass}
+                  setIsFetching={setIsFetching}
+                />
+                <Stack alignItems="center" direction="row" spacing={2}></Stack>
               </Stack>
-            </Stack>
+            </Grid>
           </Grid>
-        </Grid>
+          {predictedClass && (
+            <Chip
+              label={predictedClass}
+              style={{ backgroundColor: "#C12F1D", height: "3vh" }}
+              sx={{ position: "fixed", bottom: 20, zIndex: 5 }}
+            ></Chip>
+          )}
+        </Stack>
       </CssBaseline>
     </ThemeProvider>
   );

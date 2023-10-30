@@ -26,13 +26,11 @@ type FormData = {
 
 interface Props {
   setPredictedClass: React.Dispatch<React.SetStateAction<string>>;
-  isFetching: boolean;
   setIsFetching: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const FileUpload: React.FC<Props> = ({
   setPredictedClass,
-  isFetching,
   setIsFetching,
 }) => {
   const classes = useStyles();
@@ -46,6 +44,7 @@ export const FileUpload: React.FC<Props> = ({
 
   const onSubmit = () => {
     setIsFetching(true);
+    setPredictedClass("");
     if (selectedFile) {
       const formDataToSend = new FormData();
       formDataToSend.append("file", selectedFile);
