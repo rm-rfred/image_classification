@@ -28,8 +28,6 @@ ENV API_ENV DEV
 
 RUN python3.10 -m pip install -r /requirements.txt
 
-COPY ./app /app
-
 COPY ./entrypoint.sh /entrypoint.sh
 
 RUN chmod 755 /entrypoint.sh
