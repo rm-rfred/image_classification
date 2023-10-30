@@ -6,7 +6,7 @@ from fastapi.openapi.docs import (
 )
 from fastapi.responses import Response
 import uvicorn
-from api.api import api_router
+from app.api.api import api_router
 
 root_router = APIRouter()
 app = FastAPI(title="IMAGE CLASSIFICATION API", openapi_url="/api/openapi.json")
