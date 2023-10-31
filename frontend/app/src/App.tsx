@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import {
   Chip,
-  CircularProgress,
   CssBaseline,
   Grid,
   IconButton,
@@ -11,6 +10,7 @@ import {
   Stack,
 } from "@mui/material";
 import { Cookies } from "react-cookie";
+import { Grid as GridLoader } from "react-loader-spinner";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
 
 import FileUpload from "./components/FileUpload";
@@ -25,6 +25,7 @@ function App() {
   useEffect(() => {
     document.title = "Image classification";
   }, []);
+  let loadingColor = themeMode === "light" ? "#E7FFFF" : "#01579b";
 
   const theme = createTheme({
     palette: {
@@ -72,7 +73,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme>
         {isFetching && (
-          <CircularProgress
+          <Grid
+            item
             sx={{
               position: "fixed",
               left: 25,
@@ -80,8 +82,19 @@ function App() {
               zIndex: 5,
               color: "#C12F1D",
             }}
-          />
+          >
+            <GridLoader
+              height="20"
+              width="20"
+              color={loadingColor}
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+              ariaLabel="three-circles-rotating"
+            />
+          </Grid>
         )}
+
         <IconButton
           color="inherit"
           sx={{ position: "fixed", right: 25, top: 25, zIndex: 5 }}
