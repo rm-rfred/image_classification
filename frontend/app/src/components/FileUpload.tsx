@@ -2,24 +2,32 @@ import React, { useState } from "react";
 
 import { Button, Grid, Stack } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useSnackbar } from "notistack";
 import { DropzoneArea } from "react-mui-dropzone";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { apiFetch } from "../utils/Fetch";
 
 const useStyles = makeStyles(() => ({
+  dropZoneClass: {
+    color: "#01579b",
+    backgroundColor: "#E7FFFF",
+  },
   previewContainer: {
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#E7FFFF",
     height: "60vh",
     width: "100vh",
   },
   preview: {
     right: "25%",
+    backgroundColor: "#E7FFFF",
     maxWidth: "100vh",
     maxHeight: "60vh",
   },
   previewImg: {
+    backgroundColor: "#E7FFFF",
     width: "50vh",
     height: "30vh",
   },
@@ -46,6 +54,7 @@ export const FileUpload: React.FC<Props> = ({
     handleSubmit,
     formState: { isDirty },
   } = methods;
+  const { enqueueSnackbar } = useSnackbar();
 
   const onSubmit = () => {
     setIsFetching(true);
@@ -56,14 +65,26 @@ export const FileUpload: React.FC<Props> = ({
 
       apiFetch("/api/image_classification/classify", "POST", {}, formDataToSend)
         .then((response) => {
+          enqueueSnackbar("Successfully predicted image content", {
+            variant: "success",
+            autoHideDuration: 3000,
+          });
           setPredictedClass(response);
           setIsFetching(false);
         })
         .catch((error) => {
+          enqueueSnackbar("An error occured", {
+            variant: "error",
+            autoHideDuration: 3000,
+          });
           console.error("Error:", error);
           setIsFetching(false);
         });
     } else {
+      enqueueSnackbar("Please select an image", {
+        variant: "error",
+        autoHideDuration: 3000,
+      });
       console.error("No file selected.");
       setIsFetching(false);
     }
@@ -93,6 +114,7 @@ export const FileUpload: React.FC<Props> = ({
                 dropzoneText={"Drop image"}
                 filesLimit={3}
                 showAlerts={isDirty}
+                dropzoneClass={classes.dropZoneClass}
                 previewGridClasses={{
                   container: classes.previewContainer,
                   item: classes.preview,

@@ -30,8 +30,8 @@ function App() {
     palette: {
       mode: themeMode,
       primary: {
-        main: "#d0d0d0",
-        light: "#FFFFFF",
+        main: "#01579b",
+        light: "#01579b",
         dark: "#ffbe4c",
         contrastText: "#000000",
       },
@@ -47,6 +47,21 @@ function App() {
         styleOverrides: {
           body: {
             background: themeMode === "light" ? "#030342" : "#D9FBFC",
+          },
+        },
+      },
+      MuiSvgIcon: {
+        styleOverrides: {
+          root: {
+            color: themeMode === "light" ? "#01579b" : "#01579b",
+          },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            borderColor: themeMode === "light" ? "#E7FFFF" : "#01579b",
+            color: themeMode === "light" ? "#E7FFFF" : "#01579b",
           },
         },
       },
@@ -76,7 +91,11 @@ function App() {
             cookies.set("theme", newTheme);
           }}
         >
-          {cookies.get("theme") === "dark" ? <Brightness7 /> : <Brightness4 />}
+          {cookies.get("theme") === "dark" ? (
+            <Brightness7 style={{ color: "#01579b" }} />
+          ) : (
+            <Brightness4 style={{ color: "#E7FFFF" }} />
+          )}
         </IconButton>
         <Stack alignItems="center">
           <Grid
@@ -99,8 +118,7 @@ function App() {
             <Grid item xs={4} md={8}>
               <Chip
                 label={predictedClass}
-                style={{ backgroundColor: "#C12F1D", height: "4vh" }}
-                // sx={{ position: "fixed", bottom: "15%", zIndex: 5 }}
+                style={{ backgroundColor: "#4caf50", height: "4vh" }}
               />
             </Grid>
           )}
