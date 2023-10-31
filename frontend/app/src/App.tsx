@@ -99,8 +99,8 @@ function App() {
             <Chip
               label={predictedClass}
               style={{ backgroundColor: "#C12F1D", height: "3vh" }}
-              sx={{ position: "fixed", bottom: 20, zIndex: 5 }}
-            ></Chip>
+              sx={{ position: "fixed", bottom: "15%", zIndex: 5 }}
+            />
           )}
         </Stack>
       </CssBaseline>

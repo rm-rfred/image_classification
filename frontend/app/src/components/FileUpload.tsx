@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Button, Stack } from "@mui/material";
+import { Button, Grid, Stack } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { DropzoneArea } from "react-mui-dropzone";
 import { FormProvider, useForm } from "react-hook-form";
@@ -8,15 +8,20 @@ import { FormProvider, useForm } from "react-hook-form";
 import { apiFetch } from "../utils/Fetch";
 
 const useStyles = makeStyles(() => ({
-  dropzoneContainer: {
+  previewContainer: {
     alignItems: "center",
     justifyContent: "center",
-    minHeight: "200px",
-    padding: "40px",
-    backgroundColor: "#f8f8f8",
-    outline: "none",
-    transition: "border .24s ease-in-out",
-    cursor: "pointer",
+    maxHeight: "100vh",
+    maxWidth: "100vh",
+  },
+  preview: {
+    maxWidth: "100vh",
+    maxHeight: "100%",
+  },
+  previewImg: {
+    display: "flex",
+    maxHeight: "20vh",
+    maxWidth: "25vh",
   },
 }));
 
@@ -77,18 +82,32 @@ export const FileUpload: React.FC<Props> = ({
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing={1}>
-            <DropzoneArea
-              acceptedFiles={["image/*"]}
-              dropzoneText={
-                "Drag and drop an image to perform image classification"
-              }
-              filesLimit={1}
-              showAlerts={isDirty}
-              previewGridClasses={{
-                container: classes.dropzoneContainer,
-              }}
-              onChange={handleFileChange}
-            />
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              style={{ maxWidth: "80vh", maxHeight: "80vh" }}
+            >
+              <DropzoneArea
+                acceptedFiles={["image/*"]}
+                dropzoneText={"Drop image"}
+                filesLimit={1}
+                showAlerts={isDirty}
+                previewGridClasses={{
+                  container: classes.previewContainer,
+                  item: classes.preview,
+                  image: classes.previewImg,
+                }}
+                getPreviewIcon={(file) => {
+                  return React.createElement("img", {
+                    className: classes.previewImg,
+                    role: "presentation",
+                    src: file.data,
+                  });
+                }}
+                onChange={handleFileChange}
+              />
+            </Grid>
             <Button type="submit" variant="outlined">
               COMPUTE IMAGE CLASSIFICATION
             </Button>
