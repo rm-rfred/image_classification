@@ -83,9 +83,9 @@ function App() {
             container
             justifyContent="center"
             alignItems="center"
-            style={{ height: "100vh" }}
+            style={{ height: "90vh" }}
           >
-            <Grid item justifyContent="center">
+            <Grid item justifyContent="center" xs={8} md={8}>
               <Stack spacing={2} alignItems="center" justifyContent="center">
                 <FileUpload
                   setPredictedClass={setPredictedClass}
@@ -96,11 +96,13 @@ function App() {
             </Grid>
           </Grid>
           {predictedClass && (
-            <Chip
-              label={predictedClass}
-              style={{ backgroundColor: "#C12F1D", height: "3vh" }}
-              sx={{ position: "fixed", bottom: "15%", zIndex: 5 }}
-            />
+            <Grid item xs={4} md={8}>
+              <Chip
+                label={predictedClass}
+                style={{ backgroundColor: "#C12F1D", height: "4vh" }}
+                // sx={{ position: "fixed", bottom: "15%", zIndex: 5 }}
+              />
+            </Grid>
           )}
         </Stack>
       </CssBaseline>

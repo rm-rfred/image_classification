@@ -11,17 +11,17 @@ const useStyles = makeStyles(() => ({
   previewContainer: {
     alignItems: "center",
     justifyContent: "center",
-    maxHeight: "100vh",
-    maxWidth: "100vh",
+    height: "60vh",
+    width: "100vh",
   },
   preview: {
+    right: "25%",
     maxWidth: "100vh",
-    maxHeight: "100%",
+    maxHeight: "60vh",
   },
   previewImg: {
-    display: "flex",
-    maxHeight: "20vh",
-    maxWidth: "25vh",
+    width: "50vh",
+    height: "30vh",
   },
 }));
 
@@ -91,7 +91,7 @@ export const FileUpload: React.FC<Props> = ({
               <DropzoneArea
                 acceptedFiles={["image/*"]}
                 dropzoneText={"Drop image"}
-                filesLimit={1}
+                filesLimit={3}
                 showAlerts={isDirty}
                 previewGridClasses={{
                   container: classes.previewContainer,
