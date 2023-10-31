@@ -1,6 +1,7 @@
 # Image classification
 
-A web app for image classification
+A web app for image classification.
+Built with **docker, docker-compose, fastapi, gRPC, react-typescript and nginx**.
 
 ![Image classification](./images/image_classification.gif)
 
