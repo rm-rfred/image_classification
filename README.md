@@ -26,9 +26,10 @@ The app is available on your [browser](http://172.17.0.1:10133)
 
 The Vision Transformer (ViT) model was proposed in An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale by Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, Neil Houlsby. It’s the first paper that successfully trains a Transformer encoder on ImageNet, attaining very good results compared to familiar convolutional architectures.
 
-![ViT architecture](./images/vit_transformer.jpg)
+![ViT architecture](./images/vit.gif)
 
-Learn more about Hugging Face's implementation on the [official website](https://huggingface.co/docs/transformers/model_doc/vit)
+For additional ressources on Vision Transformers, please refer to [paperswithcode](https://paperswithcode.com/method/vision-transformer)
+Learn more about Hugging Face's implementation on the [official website](https://huggingface.co/docs/transformers/model_doc/vit) :hugs:
 
 ## gRPC image classification worker
 
