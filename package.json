@@ -1,9 +1,0 @@
-{
-  "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
-  },
-  "dependencies": {
-    "notistack": "^3.0.1",
-    "react-loader-spinner": "^5.4.5"
-  }
-}
